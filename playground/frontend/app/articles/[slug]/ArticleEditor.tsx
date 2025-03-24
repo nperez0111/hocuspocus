@@ -3,6 +3,7 @@
 import { SocketContext } from "@/app/SocketContext";
 import CollaborativeEditor from "@/app/articles/[slug]/CollaborativeEditor";
 import { HocuspocusProvider } from "@hocuspocus/provider";
+// import { TiptapCollabProvider } from "@tiptap-cloud/provider";
 import { useContext, useEffect, useState } from "react";
 
 export default function ArticleEditor({ slug }: { slug: string }) {
@@ -13,6 +14,7 @@ export default function ArticleEditor({ slug }: { slug: string }) {
 	useEffect(() => {
 		if (!socket) return;
 
+		// const _p = new TiptapCollabProvider({
 		const _p = new HocuspocusProvider({
 			websocketProvider: socket,
 			name: slug,

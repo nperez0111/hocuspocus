@@ -2,6 +2,10 @@
 
 import { SocketContext } from "@/app/SocketContext";
 import { HocuspocusProviderWebsocket } from "@hocuspocus/provider";
+// import {
+// 	TiptapCollabProvider,
+// 	TiptapCollabProviderWebsocket,
+// } from "@tiptap-cloud/provider";
 import { useEffect, useState } from "react";
 
 export default function Layout({
@@ -17,6 +21,9 @@ export default function Layout({
 		const newlyCreatedSocket = new HocuspocusProviderWebsocket({
 			url: "ws://localhost:1234",
 		});
+		// const newlyCreatedSocket = new TiptapCollabProviderWebsocket({
+		// 	appId: "",
+		// });
 
 		setSocket(newlyCreatedSocket);
 

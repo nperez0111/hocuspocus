@@ -10,7 +10,7 @@ export default function Home() {
 				collaborative editing :)
 			</p>
 			<p>
-				The websocket is opened once you enter the archives/ routes and closed
+				The websocket is opened once you enter the articles/ routes and closed
 				when you leave them.
 			</p>
 			<p>
