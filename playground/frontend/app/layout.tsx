@@ -1,0 +1,37 @@
+import Link from "next/link";
+import "./globals.css";
+
+export default function RootLayout({
+	children,
+}: Readonly<{
+	children: React.ReactNode;
+}>) {
+	return (
+		<html lang="en">
+			<body>
+				<div className="grid grid-cols-10">
+					<div className="col-span-2">
+						<h1>List of articles:</h1>
+
+						<ul>
+							<li>
+								<Link href="/articles/1">Article 1</Link>
+							</li>
+							<li>
+								<Link href="/articles/2">Article 2</Link>
+							</li>
+							<li>
+								<Link href="/articles/3">Article 3</Link>
+							</li>
+							<li>
+								<Link href="/articles/4">Article 4</Link>
+							</li>
+						</ul>
+					</div>
+
+					<div className="col-span-8">{children}</div>
+				</div>
+			</body>
+		</html>
+	);
+}
