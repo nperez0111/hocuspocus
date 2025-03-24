@@ -8,12 +8,12 @@ import { useContext, useEffect, useState } from "react";
 export default function ArticleEditor({ slug }: { slug: string }) {
 	const socket = useContext(SocketContext);
 
-	const [provider, setProvider] = useState<HocuspocusProvider | null>(null);
+	const [provider, setProvider] = useState<HocuspocusProvider>();
 
 	useEffect(() => {
-		if (!socket || provider) return;
+		if (!socket) return;
 
-		const _provider = new HocuspocusProvider({
+		const _p = new HocuspocusProvider({
 			websocketProvider: socket,
 			name: slug,
 			onOpen: () => console.log("onOpen!"),
@@ -23,23 +23,25 @@ export default function ArticleEditor({ slug }: { slug: string }) {
 				console.log("onAuthenticationFailed", data),
 		});
 
-		setProvider(_provider);
+		setProvider(_p);
 
 		return () => {
-			_provider.detach();
+			_p.detach();
 		};
-	}, [socket, slug, provider]);
+	}, [socket, slug]);
 
-	if (socket && provider) {
-		// only attach here, as otherwise useEffect running twice (in React strict mode) would trigger two connections that can create issues in local development
-		return (
-			<div>
-				<h1>Article editor!</h1>
-
-				<CollaborativeEditor slug={slug} provider={provider} />
-			</div>
-		);
+	if (!provider) {
+		return <></>;
 	}
 
-	return <></>;
+	// you need to attach here, to make sure the connection gets properly established due to React strict-mode re-run of hooks
+	provider.attach();
+
+	return (
+		<div>
+			<h1>Article editor!</h1>
+
+			<CollaborativeEditor slug={slug} provider={provider} />
+		</div>
+	);
 }

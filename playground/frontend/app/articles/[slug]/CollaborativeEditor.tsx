@@ -2,6 +2,7 @@
 
 import type { HocuspocusProvider } from "@hocuspocus/provider";
 import { Collaboration } from "@tiptap/extension-collaboration";
+import { CollaborationCursor } from "@tiptap/extension-collaboration-cursor";
 import { EditorContent, useEditor } from "@tiptap/react";
 import { StarterKit } from "@tiptap/starter-kit";
 import * as Y from "yjs";
@@ -42,6 +43,9 @@ const CollaborativeEditor = (props: {
 				Collaboration.configure({
 					document: props.provider.document,
 				}),
+				CollaborationCursor.configure({
+					provider: props.provider,
+				}),
 			],
 			// immediatelyRender needs to be `false` when using SSR
 			immediatelyRender: false,
@@ -54,9 +58,6 @@ const CollaborativeEditor = (props: {
 		},
 		[props.provider.document],
 	);
-
-	// you need to attach here, to make sure the connection gets properly established due to React strict-mode re-run of hooks
-	props.provider.attach();
 
 	return <EditorContent editor={editor} />;
 };

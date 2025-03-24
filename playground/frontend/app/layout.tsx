@@ -8,12 +8,18 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body>
+			<body className="m-4">
 				<div className="grid grid-cols-10">
 					<div className="col-span-2">
-						<h1>List of articles:</h1>
-
 						<ul>
+							<li>
+								<Link href="/">Homepage</Link>
+							</li>
+						</ul>
+
+						<h1 className="mt-4">List of articles:</h1>
+
+						<ul className="ml-6 list-disc">
 							<li>
 								<Link href="/articles/1">Article 1</Link>
 							</li>

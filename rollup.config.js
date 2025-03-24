@@ -87,6 +87,8 @@ async function build(commandLineArgs) {
 				...basePlugins,
 				typescript({
 					compilerOptions: {
+						declaration: true,
+						declarationDir: path.join(basePath, "dist"),
 						paths: {
 							"@hocuspocus/*": ["packages/*/src"],
 						},
