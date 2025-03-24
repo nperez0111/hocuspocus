@@ -16,18 +16,19 @@ export const useSocket = () => {
 	);
 
 	useEffect(() => {
+		// havent found a better way to only create a single websocket connection even when using React strict mode in development
 		if (window.socket) {
 			setSocket(window.socket);
 		} else {
-			setSocket(
-				new HocuspocusProviderWebsocket({
-					url: "ws://localhost:1234",
-				}),
-			);
+			const newlyCreatedSocket = new HocuspocusProviderWebsocket({
+				url: "ws://localhost:1234",
+			});
 
-			window.socket = socket;
+			setSocket(newlyCreatedSocket);
+
+			window.socket = newlyCreatedSocket;
 		}
-	}, [socket]);
+	}, []);
 
 	return { socket: socket };
 };

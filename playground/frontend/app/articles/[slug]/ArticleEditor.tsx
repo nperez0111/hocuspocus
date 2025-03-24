@@ -32,7 +32,6 @@ export default function ArticleEditor({ slug }: { slug: string }) {
 
 	if (socket && provider) {
 		// only attach here, as otherwise useEffect running twice (in React strict mode) would trigger two connections that can create issues in local development
-		provider.attach();
 		return (
 			<div>
 				<h1>Article editor!</h1>
